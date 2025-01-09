@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mollywood game</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+
+*{
+margin:0;
+}
+body{
+margin:0;
+}
+#body{
+margin:0;
+width:100%;
+height:100vh;
+background:lightpink;
+background-image:url(Image/Mollywood.jpg);
+background-repeat:repeat;
+background-size:200px 200px;
+background-position:center;
+}
+#playground{
+background:rgba(255,255,255,0.92);
+display:none;
+width:300px;
+height:400px;
+position:relative;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+align-content:center;
+color:grey;
+border:2px solid black;
+border-radius:10px;
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+#scoreboard{
+background:rgba(255, 255, 255,0.90);
+display:block;
+width:335px;
+height:500px;
+align-content:center;
+color:rgb(0,0,1,0.25);
+border:2px solid black;
+border-radius:10px;
+box-shadow: 4px 4px 3px 0px rgba(0,0,0,0.75);
+position:relative;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+overflow:hidden;
+display:;
+}
+#scoreboard{
+resize:horizontal;
+
+}
+#playground div{
+text-align:center;
+position:relative;
+top:5%;
+}
+/*keyboard enabling option design*/
+#scoreboard #forkeyboard{
+width:60px;
+background:none;
+border-radius:50px;
+border:2px solid grey;
+position:absolute;
+left:2px;
+top:10px;
+margin:0;
+}
+#scoreboard #forkeyboard div{
+width:30px;
+height:30px;
+border-radius:50%;
+background:white;
+position:relative;
+left:50px;
+display:grid;
+}
+#scoreboard #forkeyboard div p{
+margin:auto;
+color:black;
+}
+/*retry button design*/
+#playground div button{
+margin-top:50px;
+width:200px;
+height:50px;
+border-radius:50px;
+border:2px solid black;
+background:none;
+font-weight:bolder;
+font-size:16px;
+}
+/*Home button in score board*/
+#playground div #Homebtn{
+margin-top:10px;
+
+}
+#playground #custmbtn{
+color:grey;
+background:none;
+border-radius:50px;
+border:1px solid grey;
+font-weight:bolder;
+margin-top:5px;
+margin-left:5px;
+display:none;
+}
+/*hover effect to retry button*/
+#playground div button:active ,.divforbutton #next-submitbutton:active {
+background:white;
+outline:none;
+}
+/*disable out line when pressing button*/
+#playground div button:hover ,#next-submitbutton:hover{
+outline:none;
+}
+#scoreboard div{
+text-align:center;
+background:;
+}
+/* button design*/
+.divforbutton{
+width:300px;
+margin-left:18px;
+}
+
+.divforbutton button{
+width:45px;
+height:45px;
+margin-left:10px;
+margin-top:10px;
+border-radius:50%;
+border:none;
+background:none;
+font-size:18px;
+font-weight:bolder;
+color:;
+}
+.divforbutton button:checked  ,.divforbutton button:hover {
+outline:none;
+}
+/*cluebutton design*/
+.divforbutton .clue1,.divforbutton .clue2,.divforbutton .clue3,.divforbutton .clue4{
+border:1px solid black;
+}
+.divforbutton .clue1 {
+background:conic-gradient(#e6e9bf,#d2b5aa,#cbaea3,#d4b5ab,
+                         #e6e9bf,#d2b5aa,#cbaea3,#d4b5ab,
+                           #e6e9bf,#d2b5aa,#cbaea3,#d4b5ab,
+                           #e6e9bf,#d2b5aa,#cbaea3,#d4b5ab);                                                         
+                                                         
+}
+.divforbutton .clue2{
+background:conic-gradient(#d95641,#b14439,#b2453a,#d25645,
+                         #d95641,#b14439,#b2453a,#d25645,
+                         #d95641,#b14439,#b2453a,#d25645,
+                         #d95641,#b14439,#b2453a,#d25645 );
+}
+.divforbutton .clue3{
+background:conic-gradient(#d7d7d7,#c3c3c3,#cccccc,#c6c6c6,
+                          #d7d7d7,#c3c3c3,#cccccc,#c6c6c6,
+                          #d7d7d7,#c3c3c3,#cccccc,#c6c6c6,
+                          #d7d7d7,#c3c3c3,#cccccc,#c6c6c6);
+                                                         
+}
+.divforbutton .clue4{
+background:conic-gradient(#edc800,#e3b600,#f3cf00,#ffe800,
+                           #edc800,#e3b600,#f3cf00,#ffe800,
+                           #edc800,#e3b600,#f3cf00,#ffe800,
+                           #edc800,#e3b600,#f3cf00,#ffe800);
+                                                         
+}
+
+
+
+/*Next button*/
+.divforbutton  #next-submitbutton{
+margin-top:25px;
+width:200px;
+height:50px;
+border-radius:50px;
+border:2px solid black;
+background:none;
+font-weight:bolder;
+font-size:16px;
+}
+#takevalue{
+display:none;
+margin:0;
+pointer-events:none;
+}
+#forstars{
+width:50px;
+display:none;
+}
+/*display screen settings*/
+#scoreboard #displayscreen{
+width:310px;
+height:90px;
+margin-top:8px;
+margin-left:11px;
+border:2px solid silver;
+overflow:hidden;
+}
+#scoreboard #displayscreen #output{
+height:50px;
+padding-top:15px;
+color:rgba(0,0,0,0.62);
+font-family:Tahoma,Arial,sans-serif;
+overflow:scroll;
+}
+#scoreboard #displayscreen #output h1{
+display:;
+}
+/*input box design when keyboard option enable*/
+#scoreboard #displayscreen #output input{
+width:310px;
+height:50px;
+border:none;
+background:none;
+outline:none;
+font-size:40px;
+overflow:scroll;
+text-align:center;
+display:none;
+}
+#scoreboard #displayscreen #cluescreen{
+width:300px;
+background:#fad7b4;
+height:30px;
+margin-left:5px;
+font-family:Courier new,monospace;
+}
+/*score display when play*/
+#scoreboard #scorescreen{
+width:100%;
+height:46px;
+}
+/*score displaying round div*/
+#scoreboard #scorescreen div div{
+background:;
+width:40px;
+height:40px;
+border-radius:50%;
+border: 3px solid blue ;
+border-top-color: #fa2d2d;
+border-bottom-color: #090991;
+border-left-color:red;
+position:absolute;
+position:relative;
+left:280px;
+top:3px;
+text-align:center;
+animation:spin 2s linear 1s infinite;
+}
+@keyframes spin{
+to{
+transform:rotate(360deg);
+}
+}
+#scoreboard #scorescreen div h4{
+margin:0;
+width:40px;
+background:;
+text-align:center;
+position:absolute;
+top:14px;
+left:283px;
+font-size:20px;
+font-family:Arial,sans-serif;
+color:black;
+}
+/*lyfe box in score*/
+ #boxforlyf{
+position:absolute;
+left:-2px;
+top:0px;
+width:225px;
+height:5px;
+background:none;
+border-radius:30px;
+border:1px solid orange ;
+overflow:hidden;
+
+}
+#boxforlyf #forlyf{
+position:absolute;
+left:0;
+width:100%;
+height:100%;
+background:orange;
+border-radius:0px;
+}
+</style>
+</head>
+<body>
+<div id="body" >
+<input type="number" value="1" id="takevalue" >
+<input type="number" id="forstars" value="50" >
+
+
+<div id="playground">
+<button onclick="custom()" id="custmbtn" >Custom</button>
+<div>
+<h3>Your score is</h3>
+<h1 id="scrdsply" >0</h1>
+<button onclick="retry()">Retry</button>
+<button onclick="homeClk()" id="Homebtn">Home</button>
+</div>
+</div>
+<div id="scoreboard" >
+<div id="forkeyboard" onclick="changekeys()"><div id="enable" style="left:30px;" ><p id="enablename" >No</p></div></div>
+<div id="scorescreen" ><!--this div is the score displaying part-->
+<span id="boxforlyf" ><span id="forlyf" style="width:220px;"  ></span></span>
+
+<div><div></div><h4 id="myscore" >50</h4></div><!--this is the score showing box-->
+</div>
+<!--This is the movie name displaying part-->
+<div id="displayscreen" >
+<div id="output" >
+<h1 style="margin:0;" id="namedsply" ></h1>
+<input id="namedsply2" >
+</div>
+<div id="cluescreen" >
+<h4 style="margin:0;letter-spacing:5px;font-size:17px;font-weight:bold;" id="clue">M___D__A</h4>
+</div>
+</div>
+
+<!--letter and clue buttons-->
+<div class="divforbutton" >
+<button onclick="letterdisplay(1)" class="ltrbtn" >A</button>
+<button onclick="letterdisplay(2)" class="ltrbtn">B</button>
+<button onclick="letterdisplay(3)" class="ltrbtn">C</button>
+<button onclick="letterdisplay(4)" class="clue1"  >C1</button>
+<br>
+<button onclick="letterdisplay(5)" class="ltrbtn">D</button>
+<button onclick="letterdisplay(6)" class="ltrbtn">E</button>
+<button onclick="letterdisplay(7)" class="ltrbtn">S</button>
+<button onclick="letterdisplay(8)" class="clue2">C2</button>
+<br>
+<button onclick="letterdisplay(9)" class="ltrbtn">M</button>
+<button onclick="letterdisplay(10)" class="ltrbtn">N</button>
+<button onclick="letterdisplay(11)" class="ltrbtn">O</button>
+<button onclick="letterdisplay(12)" class="clue3">C3</button>
+<br>
+<button onclick="letterdisplay(13)" class="ltrbtn">3</button>
+<button onclick="letterdisplay(14)" class="ltrbtn">2</button>
+<button onclick="letterdisplay(15)" class="ltrbtn">R</button>
+<button onclick="letterdisplay(16)" class="clue4">C4</button>
+<br>
+<button style="width:40px;height:40px;background:red;border:2px black;" onclick="quitf()">Qt</button>
+<button style="width:40px;height:40px;background:green;border:2px black;" onclick="backspace()">Cr</button>
+<button onclick="display()" id="next-submitbutton" >Next</button>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+var i=document.getElementById("takevalue").value;
+
+//movie database
+var person=[
+{
+moviename:"MOHANLAL",
+clue:"M__A__A_",
+ltrbtn:["A","B","C","H","N","L","O","P","M","U","V","W"],
+clue1:"Lead roles were done by indrajith & manju warrier",
+clue2:"Character name of indrajith and manjuwarrier are sethumadhavan and Meenukutti",
+clue3:"Manju warrier's character is an ardent mohanlal fan",
+clue4:"MO_A_LAL"
+},
+{
+moviename:"MINNALMURALI",
+clue:"_I__A__U_A__",
+ltrbtn:["A","U","R","M","L","N","I","F","O","P","K","S"],
+clue1:"Tovino is the Hero",
+clue2:"First letter is M and last two letters L & I",
+clue3:"Hero of the movie is a superhero",
+clue4:"Character name of tovino is murali"
+},
+{
+moviename:"KUNJIRAMAYANAM",
+clue:"KU__I___A__A_",
+ltrbtn:["K","U","I","A","B","R","Y","M","P","N","C","J"],
+clue1:"Actors:VineethSreenivasan,DhyanSreenivasan,Ajuvarghese",
+clue2:"Directed by Basil joseph",
+clue3:"Bijumenon in guest role",
+clue4:"K U N _ I R_ M _ _NAM"
+},
+{moviename:"LUCIFER",
+clue:"_U_I_E_",
+ltrbtn:["A","E","I","O","U","L","R","F","G","C","T","K"],
+clue1:"Mohanlal is the hero",
+clue2:"Steephen nedumpalli is a character name of hero",
+clue3:"This is the first filim get 200 crore box office collection from kerala",
+clue4:"Directed by Prithviraj"},
+{moviename:"PARAVA",
+clue:"_A_A_A",
+ltrbtn:["A","J","K","L","P","Q","M","N","R","S","V","U"],
+clue1:"Actors:Shane nigam,Soubinshahir,Sreenathbhasi",
+clue2:"Dulquer salman in guest role",
+clue3:"Director:Soubin shahir",
+clue4:"The word is related to bird"},
+{moviename:"MALIK",
+clue:"_A_I_",
+ltrbtn:["K","U","N","J","A","I","M","L","P","Y","F","G"],
+clue1:"Hero:Fahadfasil",
+clue2:"First letter is M",
+clue3:"Director:Maheshnarayanan",
+clue4:"'Ramadapalli' is an important name in this movie"},
+{moviename:"MARADONA",
+clue:"M___D_N_",
+ltrbtn:["M","O","N","A","D","Q","R","X","C","V","Y","Z"],
+clue1:"Movie name related to a footballplayer",
+clue2:"Hero:Tovino",
+clue3:"Character name of tovino and movie name are same",
+clue4:"This movie has a relation with an argentine player"},
+{moviename:"PRIEST",
+clue:"_R__ST",
+ltrbtn:["S","U","V","T","A","R","P","I","E","M","K","O"],
+clue1:"Hero:mammooty",
+clue2:"Mammooty in priest role",
+clue3:"First letter is P",
+clue4:"Mammoty's role is the movie name"},
+{moviename:"KURUTHI",
+clue:"_UR___I",
+ltrbtn:["U","R","I","K","B","F","C","H","E","T","O","N"],
+clue1:"First letter is K",
+clue2:"Prithviraj,Roshan,Mamukkoya are main characters",
+clue3:"word is related to 'Kill'",
+clue4:"There is only one actress in this movie"},
+{moviename:"CIDMOOSA",
+clue:"_I__OOS_",
+ltrbtn:["M","A","S","L","I","E","O","U","C","G","D","2"],
+clue1:"Hero:Dileep Heroin:Bhavana" ,
+clue2:"Sahadevan is the character name of hero",
+clue3:"Dileep's role is a Private Detective",
+clue4:"The hero has a dog named arjun"},
+{moviename:"RAJAMANIKYAM",
+clue:"_AJ_M____YAM",
+ltrbtn:["A","J","K","Y","M","I","E","R","S","N","O","U"],
+clue1:"Hero:mammooty&Firstletter:R",
+clue2:"Mammoty speak in trivandrum slang",
+clue3:"Character name of hero bellari raja",
+clue4:"Dialogue:'Thalle kalipp theeranillall'"
+},
+{moviename:"VELLAM",
+clue:"_E__A_",
+ltrbtn:["V","E","A","O","P","Q","Y","M","G","L","U","R"],
+clue1:"Lastlettor:M",
+clue2:"Hero:Jayasurya",
+clue3:"This movie is based on a true story",
+clue4:"Murali, a man struggling with alcoholism, goes through humiliation and is considered a burden",
+},
+{moviename:"CRAZYGOPALAN",
+clue:"__A_Y___A__N",
+ltrbtn:["A","C","N","X","Y","Z","P","R","O","L","G","F"],
+clue1:"Firstlettor:C",
+clue2:"Hero:Dileep",
+clue3:"Character name of hero:Gopalan",
+clue4:"__AZYGO_A__N"
+},
+{moviename:"PORINJUMARIYAMJOSE",
+clue:"_O____U_A__Y_M___E",
+ltrbtn:["P","U","A","M","I","E","O","J","Y","R","N","S"],
+clue1:"Director:joshi",
+clue2:"First letter 'P'",
+clue3:"Jojujeorge,Chemban vinod,Nailausha are in main roles",
+clue4:"kattalan porinju is the character of jojujeorge"
+},
+{moviename:"DRISHYAM",
+clue:"__I__YA_",
+ltrbtn:["A","Y","N","H","R","S","I","M","D","B","O","U"],
+clue1:"Yellow car",
+clue2:"Dhyanam",
+clue3:"Varun",
+clue4:"Jeethujoseph"
+},
+{moviename:"NJANPRAKASHAN",
+clue:"_JA___A____A_",
+ltrbtn:["J","A","P","M","R","N","H","S","K","Y","E","O"],
+clue1:"Fahadfasil-Nurse",
+clue2:"Germany",
+clue3:"Director:Sathyananthikad",
+clue4:"Fahadfasil-prakashan"
+},
+{moviename:"NAYATTU",
+clue:"N___TT_",
+ltrbtn:["A","T","K","M","N","G","O","Y","C","U","L","P"],
+clue1:"Kunjakko boban",
+clue2:"Martin prakkat",
+clue3:"Police",
+clue4:"Jojugoerge & Nimishasajayan"
+},
+{moviename:"USTADHOTEL",
+clue:"__T____TEL",
+ltrbtn:["A","T","D","N","U","E","L","Y","S","H","B","O"],
+clue1:"Kreem ikka's Biriyani",
+clue2:"First letter 'U'",
+clue3:"Dulquersalman",
+clue4:"Anwar rasheed"
+},
+{moviename:"SPADIKAM",
+clue:"_PA____M",
+ltrbtn:["B","S","M","I","D","O","K","S","P","A","U","G"],
+clue1:"Mohanlal",
+clue2:"ba ba bba",
+clue3:"Aadu Thoma",
+clue4:"Thilakan:kaduva"
+},
+{moviename:"CHESS",
+clue:"C_E_S",
+ltrbtn:["C","B","M","U","W","P","K","G","F","H","E","S"],
+clue1:"blind killer",
+clue2:"Dileep",
+clue3:"Board game",
+clue4:"Harisree ashokan in Thief role"
+},
+{moviename:"PREMAM",
+clue:"__E_AM",
+ltrbtn:["P","A","Y","E","R","F","G","K","M","U","S","O"],
+clue1:"Nivinpauli's filim",
+clue2:"Alphones puthran - director",
+clue3:"Malarmiss",
+clue4:"first-letter : P"
+
+},
+{moviename:"HRIDAYAM",
+clue:"_R____AM",
+ltrbtn:["P","A","Y","E","R","F","G","H","M","U","I","D"],
+clue1:"vineeth sreenivasan - director",
+clue2:"KC TECH college",
+clue3:"Pranav mohanlal,kalyanipriyadarshan,darshana",
+clue4:"Heart - Malayalam"
+},
+{moviename:"CHOTTAMUMBAI",
+clue:"__OTT____BAI",
+ltrbtn:["C","A","T","E","B","F","U","T","M","I","H","O"],
+clue1:"Anwar rasheed - mohanlal filim",
+clue2:"Thala",
+clue3:"CHOTTA",
+clue4:"Second word - mumbai"
+
+}
+
+];
+
+var input = document.getElementById("namedsply2");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode ===13 ) {
+    event.preventDefault();
+    document.getElementById("next-submitbutton").click();
+  }
+});
+const lmt=person.length-1;
+cluedsplay();
+function display(){
+i=document.getElementById("takevalue").value;
+Mscore=Number(document.getElementById("myscore").innerHTML);
+if(i<lmt){
+if(i>=1){
+checkCorrect();}else{
+i++;
+document.getElementById("takevalue").value=i;
+}
+
+document.getElementById("next-submitbutton").innerHTML="Next";
+document.getElementById("playground").style.display="none";
+document.getElementById("scoreboard").style.display="block";
+cluedsplay();
+}else if(i==lmt){
+checkCorrect();
+document.getElementById("next-submitbutton").innerHTML="Finish";
+cluedsplay();
+}
+
+else{
+checkCorrect();
+cluedsplay();
+
+}
+}
+/*what happen in screen when press a button*/
+function letterdisplay(ltr){
+var car;
+var Mscore=Number(document.getElementById("myscore").innerHTML);
+var Nstars=Number(document.getElementById("forstars").value)
+switch(ltr){
+case 1:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[0].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 2:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[1].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 3:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[2].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 4:
+var j=document.getElementById("takevalue").value;
+var p=j-1;
+alert(person[p].clue1);
+break;
+case 5:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[3].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 6:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[4].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 7:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[5].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 8:
+var j=document.getElementById("takevalue").value;
+var p=j-1;
+alert(person[p].clue2);
+Mscore-=10;
+Nstars-=2;
+break;
+case 9:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[6].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 10:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[7].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 11:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[8].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 12:
+var j=document.getElementById("takevalue").value;
+var p=j-1;
+alert(person[p].clue3);
+Mscore-=20;
+Nstars-=4;
+break;
+case 13:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[9].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 14:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[10].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 15:
+car=document.getElementById("namedsply").innerHTML;
+car=car+document.getElementsByClassName("ltrbtn")[11].innerHTML;
+document.getElementById("namedsply").innerHTML=car;
+break;
+case 16:
+var j=document.getElementById("takevalue").value;
+var p=j-1;
+alert(person[p].clue4);
+Mscore-=30;
+Nstars-=6;
+break;
+default:
+alert("idiot");
+break;
+}
+document.getElementById("myscore").innerHTML=Mscore;
+document.getElementById("forstars").value=Nstars;
+}
+
+//when backspace click
+function backspace(){
+var display=document.getElementById("namedsply");
+display.innerText = display.innerText.slice(0, -1);
+}
+
+//this function for change letter buttons and clues with question
+function cluedsplay(){
+var num=Number(document.getElementById("takevalue").value);
+document.getElementById("clue").innerHTML=person[num-1].clue;
+//for change letter buttons
+document.getElementsByClassName("ltrbtn")[0].innerHTML=person[num-1].ltrbtn[0];
+document.getElementsByClassName("ltrbtn")[1].innerHTML=person[num-1].ltrbtn[1];
+document.getElementsByClassName("ltrbtn")[2].innerHTML=person[num-1].ltrbtn[2];
+document.getElementsByClassName("ltrbtn")[3].innerHTML=person[num-1].ltrbtn[3];
+document.getElementsByClassName("ltrbtn")[4].innerHTML=person[num-1].ltrbtn[4];
+document.getElementsByClassName("ltrbtn")[5].innerHTML=person[num-1].ltrbtn[5];
+document.getElementsByClassName("ltrbtn")[6].innerHTML=person[num-1].ltrbtn[6];
+document.getElementsByClassName("ltrbtn")[7].innerHTML=person[num-1].ltrbtn[7];
+document.getElementsByClassName("ltrbtn")[8].innerHTML=person[num-1].ltrbtn[8];
+document.getElementsByClassName("ltrbtn")[9].innerHTML=person[num-1].ltrbtn[9];
+document.getElementsByClassName("ltrbtn")[10].innerHTML=person[num-1].ltrbtn[10];
+document.getElementsByClassName("ltrbtn")[11].innerHTML=person[num-1].ltrbtn[11];
+}
+//This function check entered value correct or not
+/*If correct it will goto next page.it not correct remain
+in same page*/
+function checkCorrect(){
+//execute when entered value is correct
+var y=Number(document.getElementById("takevalue").value);
+var Mscore=Number(document.getElementById("myscore").innerHTML);
+var Nstars=Number(document.getElementById("forstars").value);
+var enabled=document.getElementById("enablename").innerHTML;
+if(enabled=="Yes"){
+var Ename=document.getElementById("namedsply2").value;}else{
+var Ename=document.getElementById("namedsply").innerHTML;
+}
+if(Ename==person[y-1].moviename){
+if(Nstars>=46){
+alert("⭐️⭐️⭐\n️Wow");
+}else if(Nstars<46&&Nstars>38){
+alert("⭐️⭐️\nGood")
+}else{
+alert("⭐️\nNotbad")
+}
+document.getElementById("namedsply").innerHTML="";
+document.getElementById("namedsply2").value="";
+if(y<=lmt){
+y=y+1;
+Mscore+=50;
+Nstars=50;
+document.getElementById("forlyf").style.width=225+"px";
+}else{
+//for the last question
+y=250;
+Mscore+=50;
+document.getElementById("playground").style.display="block";
+document.getElementById("scoreboard").style.display="none";
+document.getElementById("scrdsply").innerHTML="-"+Mscore+"-";
+Mscore=50;
+Nstars=50;
+document.getElementById("forlyf").style.width=y+"px";
+}
+
+}else{
+//execute when it is fales
+alert("🤭🤭🤭\nwrong!!!");
+document.getElementById("namedsply").innerHTML=Ename;
+y=y+0;
+Mscore-=1;
+Nstars-=2;
+}
+document.getElementById("takevalue").value=y;
+document.getElementById("myscore").innerHTML=Mscore;
+document.getElementById("forstars").value=Nstars;
+}
+//this function will execute when press quit button
+function quitf(){
+var Mscore=document.getElementById("myscore").innerHTML;
+document.getElementById("takevalue").value=0;
+document.getElementById("playground").style.display="block";
+document.getElementById("scoreboard").style.display="none";
+document.getElementById("scrdsply").innerHTML="-"+Mscore+"-";
+document.getElementById("myscore").innerHTML=50;
+document.getElementById("forstars").value=50;
+document.getElementById("forlyf").style.width=250+"px";
+document.getElementById("namedsply").innerHTML="";
+}
+function homeClk(){
+window.location="GameHome1.html"
+}
+
+function dcrswdth(){
+var w1=document.getElementById("takevalue").value;
+var w=document.getElementById("forlyf").style.width;
+w=parseInt(w);
+if(w>=20){
+if(w1>0){
+var y=w-4;}else{
+y=w-0;
+}
+}else{
+y=280;
+quitf();
+}
+document.getElementById("forlyf").style.width=y+"px";
+}
+setInterval(dcrswdth,1000);
+function retry(){
+document.getElementById("takevalue").value=0;
+document.getElementById("forstars").value=50;
+document.getElementById("forlyf").style.width=224+"px";
+display();
+
+}
+//changes happen when enable or disable button
+function changekeys(){
+let position;
+position=parseInt(document.getElementById("enable").style.left);
+if(position===30){
+document.getElementById("enable").style.left=0+"px";
+document.getElementById("enablename").innerHTML="Yes";
+document.getElementById("forkeyboard").style.background="blue";
+document.getElementById("forkeyboard").style.borderColor="blue";
+document.getElementById("namedsply2").style.display="inline";
+document.getElementById("namedsply").style.display="none";
+}else{
+document.getElementById("enable").style.left=30+"px";
+document.getElementById("enablename").innerHTML="No";
+document.getElementById("forkeyboard").style.background="none";
+document.getElementById("forkeyboard").style.borderColor="grey";
+document.getElementById("namedsply2").style.display="none";
+document.getElementById("namedsply").style.display="inline";
+}
+
+}
+function custom(){
+swal("Wrong!!!", "You clicked the button!", "error")
+
+
+}
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>

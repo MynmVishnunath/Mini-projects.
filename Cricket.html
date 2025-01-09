@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Luckycricket</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@600&display=swap" rel="stylesheet"> 
+<style type="text/css">
+body{
+margin:0;
+padding:0;
+width:100%;
+height:100vh;
+background:#ccc;
+
+}
+/*set target box design*/
+#targetcontainer{
+background:khaki;
+height:220px;
+width:100%;
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-family: 'Gemunu Libre', Tahoma;
+
+}
+/*target getting part*/
+#gettarget{
+width:100%;
+height:40px;
+color:green;
+float:left;
+margin-top:20px;
+text-align:center;
+}
+.SSPbutton{
+width:70px;
+height:40px;
+margin-top:5px;
+margin-left:50%;
+transform:translateX(-50%);
+background:purple;
+color:white;
+border-radius:15px;
+display:none;
+}
+
+#container{
+margin:0;
+width:100%;
+max-width:400px;
+height:500px;
+margin-top:0px;
+display:none;
+font-family: 'Gemunu Libre', Tahoma;
+/*position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50% -50%);*/
+}
+/*style for head section contain scoreboard
+and innings board*/
+#headscore{
+background:green;
+width:100%;
+height:59px;
+text-align:center;
+
+}
+/*innings*/
+#forinnings{
+margin-top:7px;
+width:70px;
+float:left;
+margin-left:20px;
+
+}
+/*score*/
+#forscore{
+margin-top:7px;
+width:70px;
+float:right;
+margin-right:20px;
+
+}
+/*red balls for represent innings*/
+.circle{
+width:10px;
+height:10px;
+border:1px solid purple;
+border-radius:50%;
+background:purple;
+float:right;
+margin-top:5px;
+margin-left:1px;
+}
+.circle:first-child {
+margin-right:5px;
+}
+.subhead{
+background:darkkhaki;
+width:100%;
+height:25px;
+border-bottom:1px solid green;
+}
+#runboard{
+width:200px;
+height:200px;
+background:green;
+text-align:center;
+margin-top:60px;
+margin-left:50%;
+border-radius:15px;
+transform:translate(-50%);
+}
+#runboard h1{
+margin:0;
+width:100%;
+margin-top:40px;
+font-size:60px;
+color:grey;
+}
+#runboard h4{
+width:100%;
+margin-top:5px;
+background:grey;
+}
+#runboard h6{
+color:green;
+width:100%;
+height:10px;
+}
+#forbutton{
+margin-top:60px;
+margin-left:42%;
+/*transform:translate(-50%);*/
+}
+.batandplay{
+background:purple;
+width:65px;
+height:65px;
+font-size:35px;
+outline:none;
+color:#ccc;
+border-radius:50%;
+}
+.batandplay:last-child {
+display:none;
+}
+#gameovrbrd{
+width:100%;
+height:500px;
+background:#ccc;
+display:none;
+
+}
+#mainbrd{
+width:300px;
+height:300px;
+background:;
+text-align:center;
+margin-top:50px;
+margin-left:30px;
+border-radius:15px;
+color:green;
+overflow:hidden;
+transition:height 1s;
+transition-timing-function:linear;
+}
+#hello{
+/*veruthe itta tag aan main boardinte👆 margin adjust cheyyan vendi*/
+width:100%;
+height:50px;
+background:#ccc;
+margin:0;
+}
+/*retry button style*/
+#retry{
+background:purple;
+width:65px;
+height:65px;
+font-size:30px;
+outline:none;
+border-radius:50%;
+margin-left:42%;
+margin-top:20px;
+font-weight:bolder;
+color:white;
+}
+@media (min-width: 481px){ 
+#container{
+width:700px;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+#forbutton{
+margin-left:45%;
+
+}
+}
+</style>
+</head>
+<body>
+<div id="targetcontainer" >
+<h1 style="width:100%;text-align:center;letter-spacing:4px;color:green;" >
+Set Your Target:
+</h1>
+<h1 id="gettarget" >0</h1>
+<br>
+<button class="SSPbutton" style="display:block;" onclick="startclick()">START </button>
+<button class="SSPbutton" onclick="stopclick()" style="font-size:20px;">&block;️</button>
+<button class="SSPbutton" onclick="playclick()" style="font-size:25px;">&#9658;️</button>
+
+</div>
+<div id="container" >
+<!--this div for both score and innings part-->
+<div id="headscore" >
+<!--this div display innings-->
+<div id="forinnings" >
+<h4 style="margin:0;">#Innings</h4>
+<h2 style="margin:0;" id="myinnings" >20</h2>
+</div>
+<!--this div display score-->
+<div id="forscore" >
+<h4 style="margin:0;">#Score</h4>
+<h2 style="margin:0;" id="myscore" >0</h2>
+</div>
+</div>
+<div class="subhead" >
+<!--p tag for show your target is -->
+<p style="width:160px;float:left;margin-top:0;margin-left:7px;color:purple;font-weight:bold;font-size:15px;" >Your Target : <em id="emtrgt2" style="font-size:20px;"  >199</em> </p>
+<!--head part end-->
+<!--Div for represent innings in red ball-->
+<div id="inningsexp" >
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+</div>
+</div>
+<!--this div display Run of the player in each batting-->
+<div id="runboard" >
+<h6></h6>
+<h1 id="runpt">START</h1>
+<h4 id="runcmd">####</h4>
+
+</div>
+<!--this div for bat button-->
+<div id="forbutton" >
+<button class="batandplay" onclick="startrun()">&#9658;</button>
+<button class="batandplay" onclick="stoprun()">&#127951;</button>
+</div>
+</div>
+<div id="gameovrbrd" >
+<h1 id="hello" ></h1>
+<div id="mainbrd" style="height:40px;" >
+       
+<h1  id="inningsovr" style="padding-top:20px;">INNINGS OVER</h1>
+<p>Target score : <em style="font-size:20px;" id="emtrgt" >199</em></p>
+<p>Your score : <em style="font-size:20px;" id="emscr" >210</em></p>
+<h2 id="state" style="margin-top:50px;" >You Le</h2>
+</div>
+<button id="retry" onclick="retry()" style="display:none;" >&#8634;</button>
+</div>
+<script type="text/javascript">
+var scores=[1,2,3,4,"OUT",1,0,1,6];
+var scores2=["Single","Double","Triple","Four","Wicket","Single","Missed","Single","Sixer"];
+var y1,gttrgt,setIntr;/* first set Intr is a global variable to call setInter val&close intr vel in start click and
+stop click function for set target*/
+var myTrgt;/*this var  for assigninggetting target score after stop click function*/
+var bno=0;
+var wdth;/*global varient for animation of game overboard*/
+var setintr;//second setintr. this for (20/20)
+function showrun(){
+y1=Math.floor(Math.random() * 9);
+document.getElementById("runpt").innerHTML=scores[y1];
+document.getElementById("runcmd").innerHTML=scores2[y1];
+//alert(scores[y1]);
+//scorechange();
+}
+function startrun(){
+setintr=setInterval(showrun,150);
+document.getElementsByClassName("batandplay")[0].style.display="none";
+document.getElementsByClassName("batandplay")[1].style.display="block";
+
+/*document.getElementById("pl").style.display="none";
+document.getElementById("bt").style.display="block";*/
+}
+//for 2 nd mode(20/20)
+function stoprun(){
+clearInterval(setintr);
+document.getElementById("myinnings").innerHTML-=1;
+document.getElementsByClassName("batandplay")[1].style.display="none";
+document.getElementsByClassName("batandplay")[0].style.display="block";
+scorechange();
+}
+function scorechange(){
+var a,b;
+a=document.getElementById("runpt").innerHTML;
+if(a=="OUT"){
+document.getElementById("runboard").style.background="#eb0738";
+document.getElementById("runpt").style.color="white";
+//document.getElementById("myinnings").innerHTML-=1;
+document.getElementsByClassName("circle")[bno].style.background="none"
+bno++;
+}else{
+document.getElementById("runboard").style.background="green";
+document.getElementById("runpt").style.color="grey";
+b=document.getElementById("myscore").innerHTML-=a*-1;
+
+}
+inningsout();
+}
+
+function inningsout(){
+var u=document.getElementById("myinnings").innerHTML;
+if(u==0){
+document.getElementById("container").style.display="none";
+document.getElementById("gameovrbrd").style.display="block";
+document.getElementById("emtrgt").innerHTML=myTrgt;
+document.getElementById("emscr").innerHTML=document.getElementById("myscore").innerHTML;
+document.getElementById("mainbrd").style.height=40+"px";
+if(document.getElementById("myscore").innerHTML>=myTrgt){
+document.getElementById("state").innerHTML="You Win";
+}else{
+document.getElementById("state").innerHTML="You Lose";
+}
+
+}else{
+
+}
+
+}
+setInterval(widthanim,100)
+function retry(){
+document.getElementById("retry").style.display="none"
+document.getElementById("myinnings").innerHTML=20;
+document.getElementById("myscore").innerHTML=0;
+document.getElementById("targetcontainer").style.display="block";
+document.getElementById("gameovrbrd").style.display="none";
+document.getElementById("runpt").innerHTML="START";
+document.getElementById("runcmd").innerHTML="####";
+document.getElementById("runboard").style.background="green";
+document.getElementById("runpt").style.color="grey";
+document.getElementById("gettarget").innerHTML=0;
+for(var y=0;y<10;y++){
+document.getElementsByClassName("circle")[y].style.background="purple";
+}
+bno=0;
+}
+function widthanim(){
+wdth=parseInt(document.getElementById("mainbrd").style.height);
+if(wdth<=300){
+wdth+=10;
+if(wdth==300){
+document.getElementById("retry").style.display="block";
+}else{
+document.getElementById("retry").style.display="none";
+}
+}else{
+wdth+=0;
+document.getElementById("retry").style.display="block";
+}
+document.getElementById("mainbrd").style.height=wdth+"px";
+}
+function startclick(){
+document.getElementsByClassName("SSPbutton")[0].style.display="none";
+document.getElementsByClassName("SSPbutton")[1].style.display="block";
+setIntr=setInterval(target,100);
+}
+function stopclick(){
+document.getElementsByClassName("SSPbutton")[1].style.display="none";
+document.getElementsByClassName("SSPbutton")[2].style.display="block";
+clearInterval(setIntr);
+myTrgt=parseInt(document.getElementById("gettarget").innerHTML);
+}
+function playclick(){
+document.getElementsByClassName("SSPbutton")[2].style.display="none"
+document.getElementsByClassName("SSPbutton")[0].style.display="block"
+document.getElementById("targetcontainer").style.display="none";
+document.getElementById("container").style.display="block";
+document.getElementById("emtrgt2").innerHTML=myTrgt;
+}
+function target(){
+gttrgt=Math.floor(Math.random() * 50)+50;
+document.getElementById("gettarget").innerHTML=gttrgt;
+}
+</script>
+</body>
+</html>
