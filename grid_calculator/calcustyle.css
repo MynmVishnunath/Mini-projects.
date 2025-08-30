@@ -1,0 +1,108 @@
+:root{
+    --tetra1:#afcc33;
+    --tetra2:#33cc9d;
+    --tetra3:#5033cc;
+    --tetra4:#cc3363;
+}
+body{
+    background:hsl(228, 30%, 90%);
+    display: flex;
+    width: 100%;
+    height: 100dvh;
+    justify-content: center;
+    align-items: center;
+    /* align-content: center; */
+}
+#amma{
+    background-color: hsl(228,10%, 90%);
+    width: 7cm;
+    height: 12cm;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1.5fr repeat(4,1fr) 1.2fr;
+    gap: 8px;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.makkal{
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 2rem;
+    color: azure;
+    background:linear-gradient(45deg,var(--tetra2) 5%,var(--tetra3));
+}
+
+.makkal:first-child{
+    display: grid;
+    grid-template-rows: 30% 1fr;
+    grid-column:1/5;
+    background:linear-gradient(45deg,var(--tetra2) 5%,var(--tetra1));
+    transform: rotateY(-2deg);
+    
+
+    
+    .res{
+        
+        text-align: right;
+        font-size: 2.7rem;
+        overflow: scroll;
+        scroll-behavior:auto ;
+        width: 100%;
+    }
+
+    .his{
+        font-size: 1rem;
+        color: #e0e9e4;
+        overflow: scroll;
+        width: 100%;
+
+    }
+    .res::-webkit-scrollbar{
+        display: none;
+    }
+    .his::-webkit-scrollbar{
+        display: none;
+    }
+}
+
+.makkal:nth-child(2),.makkal:nth-child(16){
+    background:linear-gradient(45deg,var(--tetra4) -20%,var(--tetra3) );
+
+}
+
+.makkal:nth-child(16)::after{
+    content:"del";
+    display: block;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+.makkal:nth-child(9){
+    grid-column: 4;
+    grid-row:3/5;
+    background:linear-gradient(45deg,rgb(80, 53, 53) -20%,var(--tetra3) );
+
+}
+.makkal:nth-child(17){
+    grid-column: 4;
+    grid-row:5/7;
+    background:linear-gradient(45deg,rgb(16, 183, 21) -20%,var(--tetra2) );
+
+}
+.makkal:nth-child(18){
+    grid-column: 1/3;
+    grid-row:6;
+}
+.makkal:nth-child(18)::after{
+    content:"shift";
+    display: block;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+   
+
+.makkal:nth-child(4),.makkal:nth-child(3),.makkal:nth-child(5){
+    background:linear-gradient(45deg,rgb(80, 53, 53) -20%,var(--tetra3) );
+
+}
