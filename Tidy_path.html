@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>path in square</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100dvh;
+            background-color: antiquewhite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .square {
+            width: 255px;
+            height: 255px;
+            background-color: rgb(246, 244, 241);
+            position: relative;
+        }
+
+     
+
+        .cell {
+            width: 5px;
+            height: 5px;
+            background-color: rgb(76, 42, 2);
+            position: absolute;
+            top: var(--t);
+            left: var(--l);
+        }
+
+     
+    </style>
+</head>
+
+<body>
+   
+    <div class="square">
+    </div>
+    <script>
+        const cells = [];
+
+        function drawCells(cell_cords) {
+            const parent = document.querySelector(".square");
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.style.top = `${cell_cords[1] * 5}px`;
+            cell.style.left = `${cell_cords[0] * 5}px`;
+            parent.appendChild(cell);
+        }
+
+        function cellPushandDraw(cell) {
+            cells.push(cell);
+            drawCells(cell);
+
+            return new Promise((res, rej) => {
+                setTimeout(res, 10)
+            });
+        }
+
+        function check_cell_in_array() {
+            let cells_obj = {};
+            cells.forEach(x => { cells_obj[x] = true });
+            return (cell) => (cells_obj[cell]) ? true : false;
+
+        }
+
+        function checkMove(currentCell, newCell) {
+            const check_cell = check_cell_in_array();
+            const change_in_x = newCell[0] - currentCell[0];
+            const change_in_y = newCell[1] - currentCell[1];
+            if (check_cell([currentCell[0] + change_in_x * 2, currentCell[1] + change_in_y * 2]) || check_cell([currentCell[0] + change_in_x, currentCell[1] + change_in_y])) {
+                return false;
+            } else if (((newCell[0] + change_in_x)) <= 0 || ((newCell[0] + change_in_x)) > 50 || ((newCell[1] + change_in_y)) <= 0 || ((newCell[1] + change_in_y)) > 50) {
+                return false;
+            } else {
+                return true;
+
+            }
+
+        }
+
+        function find_possible_moves(currentCell) {
+            const cells_obj = [];
+            checkMove(currentCell, [currentCell[0] - 1, currentCell[1]]) && cells_obj.push([currentCell[0] - 1, currentCell[1]]);
+            checkMove(currentCell, [currentCell[0] + 1, currentCell[1]]) && cells_obj.push([currentCell[0] + 1, currentCell[1]]);
+            checkMove(currentCell, [currentCell[0], currentCell[1] + 1]) && cells_obj.push([currentCell[0], currentCell[1] + 1]);
+            checkMove(currentCell, [currentCell[0], currentCell[1] - 1]) && cells_obj.push([currentCell[0], currentCell[1] - 1]);
+            return cells_obj;
+        }
+
+        function choose_next_Random_move(currentCell) {
+            let next_Moves = find_possible_moves(currentCell);
+            return next_Moves[Math.round(Math.random() * (next_Moves.length - 1))];
+        }
+
+        function keep_momentum() {
+            //1st step identify the direction of momentum
+            let change_in_x = cells[cells.length - 1][0] - cells[cells.length - 2][0] //The difference between cell arrays last elements x value (0 th element ) and just previous element
+            let change_in_y = cells[cells.length - 1][1] - cells[cells.length - 2][1] //The difference between cell arrays last elements y value (1 th element ) and just previous element
+
+            /**change in x 0 no direction change
+             * -1 left
+             * 1 right
+             * 
+             * change in y 0 no direction change
+             * -1 down
+             * 1 up
+             */
+            let currentCell = cells[cells.length - 1];
+            return (checkMove(currentCell, [currentCell[0] + change_in_x, currentCell[1] + change_in_y])) ? [currentCell[0] + change_in_x, currentCell[1] + change_in_y] : false;
+
+        }
+
+       async  function Move() {
+            let newCell;
+            // The initial step, Find first cell and its next move
+            {
+                cells.push([Math.round(Math.random() * 50), Math.round(Math.random() * 50)]/*The initial cell */);
+
+                //    choose a random move
+                newCell = choose_next_Random_move(cells[0]);
+                newCell && await cellPushandDraw(newCell);
+            }
+
+            while (newCell) {
+                //check if can keep momentum else change direction (when meets a block)
+                if (newCell = keep_momentum()) {
+                   await  cellPushandDraw(newCell);
+
+                } else {
+                    newCell = choose_next_Random_move(cells[cells.length - 1]);
+                    newCell && await cellPushandDraw(newCell);
+                }
+
+            }
+        }
+
+        Move();
+
+
+
+    </script>
+</body>
+
+</html>
